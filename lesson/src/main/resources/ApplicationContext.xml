@@ -16,7 +16,10 @@
     <bean id="myPerson"
         class="com.example.Person"
     >
-        <constructor-arg ref="myDog"></constructor-arg>
+        <!--  <constructor-arg ref="myCat"></constructor-arg> -->
+        <property name="pet" ref="myDog"></property>
+        <property name="name" value="Ivan"></property>
+        <property name="age" value="27"></property>
     </bean>
 
 
