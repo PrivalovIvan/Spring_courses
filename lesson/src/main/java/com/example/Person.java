@@ -1,18 +1,23 @@
 package com.example;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component("personBean")
 public class Person {
     private Pet pet;
     private String name;
     private int age;
 
-    // Person(Pet pet) {
-    // System.out.println("Person bean is created!");
-    // this.pet = pet;
-    // }
-    Person() {
+    @Autowired
+    Person(Pet pet) {
         System.out.println("Person bean is created!");
-
+        this.pet = pet;
     }
+    // Person() {
+    // System.out.println("Person bean is created!");
+
+    // }
 
     public String getName() {
         return name;
