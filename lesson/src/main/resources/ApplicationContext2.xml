@@ -6,10 +6,12 @@
                         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
     <context:property-placeholder location="classpath:myApp.properties" />
     <bean id="myDog"
-        class="com.example.Dog">
+        class="com.example.Dog"
+        scope="prototype">
     </bean>
     <bean id="myCat"
-        class="com.example.Cat">
+        class="com.example.Cat"
+        scope="prototype">
     </bean>
 
 
