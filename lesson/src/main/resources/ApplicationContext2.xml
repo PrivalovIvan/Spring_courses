@@ -7,12 +7,16 @@
     <context:property-placeholder location="classpath:myApp.properties" />
     <bean id="myDog"
         class="com.example.Dog"
-        scope="prototype">
+        init-method="init"
+        destroy-method="destroy"
+    >
     </bean>
-    <bean id="myCat"
+    <!-- <bean id="myCat"
         class="com.example.Cat"
-        scope="prototype">
-    </bean>
+        init-method="init"
+        destroy-method="destroy"
+    >
+    </bean> -->
 
 
 </beans>
