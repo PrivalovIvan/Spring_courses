@@ -1,5 +1,8 @@
 package com.example;
 
+import org.springframework.stereotype.Component;
+
+@Component("dogBean")
 public class Dog implements Pet {
     private String name;
 
