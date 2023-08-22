@@ -1,9 +1,13 @@
 package aop.aspects;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+
+import aop.Book;
 
 @Component
 @Aspect
@@ -58,9 +62,32 @@ public class LoggingAspect {
     // }
     // -------------------------------------------------------------------------------------------------------------
 
-    @Before("aop.aspects.MyPointcuts.allGetMethod()")
-    public void beforeGetLoggingAdvace() {
+    @Before("aop.aspects.MyPointcuts.allAddMethod()")
+    public void beforeAddLoggingAdvace(JoinPoint joinPoint) {
+        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
+        // System.out.println("methodSignature: " + methodSignature);
+        // System.out.println("methodSignature: " + methodSignature.getMethod());
+        // System.out.println("methodSignature: " + methodSignature.getReturnType());
+        // System.out.println("methodSignature: " + methodSignature.getName());
         System.out.println("beforeGetBookAdvace: логирование попытки получить книгу/журнал.");
+        System.out.println("-----------------------------------");
+        if (methodSignature.getName().equals("addBook")) {
+            Object[] args = joinPoint.getArgs();
+            for (Object obj : args) {
+                if (obj instanceof Book) {
+                    Book myBook = (Book) obj;
+                    System.out.println("Информация о книге:\nНазвание: " + myBook.getName() + "\nГод публикации: "
+                            + myBook.getEyarOfPublication() + "\nАвтор: " + myBook.getAuthor());
+                    System.out.println("-----------------------------------");
+
+                } else if (obj instanceof String) {
+                    System.out.println("Книгу добавил: " + obj);
+                    System.out.println("-----------------------------------");
+
+                }
+            }
+        }
+
     }
 
     // // @Before("execution(public void return*())")
