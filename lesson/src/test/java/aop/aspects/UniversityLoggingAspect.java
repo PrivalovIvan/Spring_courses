@@ -1,6 +1,5 @@
 package aop.aspects;
 
-import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
@@ -32,10 +31,11 @@ public class UniversityLoggingAspect {
     // "afterThrowingGetStudentsLoggingAdvice: логируем выброс исключения: " +
     // exception.getMessage());
     // }
-    @After("execution(* getStudents())")
-    public void afterGetStudntsLoggingAdvice() {
+    // @After("execution(* getStudents())")
+    // public void afterGetStudntsLoggingAdvice() {
 
-        System.out.println(
-                "afterGetStudntsLoggingAdvice: логируем нормальное окончание работы метода или выброс исключения.");
-    }
+    // System.out.println(
+    // "afterGetStudntsLoggingAdvice: логируем нормальное окончание работы метода
+    // или выброс исключения.");
+    // }
 }
