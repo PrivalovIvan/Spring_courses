@@ -11,18 +11,17 @@ import hibernate_test2.entity.Detail;
 public class Test1 {
     public static void main(String[] args) {
 
-        Employee emp = new Employee("Veronika", "Potapova", "HR", 750);
+        Employee emp = new Employee("Pavel", "Turcan", "IT", 950);
 
-        Detail detail = new Detail("Ekaterinburg", "7123456789", "mail@mail.com");
+        Detail detail = new Detail("Moscow", "7987654321", "mail1@mail.com");
         emp.setEmpDetail(detail);
-        addEmployeeInDB(emp);
         // addEmployeeInDB(emp);
         // addEmployeeInDB(emp2);
-        // getEmployeeFromDBById(2);
+        // getEmployeeFromDBById(1);
         // showAllEmployees();
         // showAllEmployeesByNameIvan();
         // updateSalaryEmployeeInDB(1);
-        removeObjectInDB(4);
+        removeObjectInDB(2);
     }
 
     public static SessionFactory sFactory() {
@@ -46,6 +45,7 @@ public class Test1 {
         Employee employee = session.get(Employee.class, id);
         session.getTransaction().commit();
         System.out.println(employee);
+        System.out.println(employee.getEmpDetail());
         sFactory().close();
 
         return employee;
@@ -90,10 +90,11 @@ public class Test1 {
     public static void removeObjectInDB(int id) {
         Session session = sFactory().getCurrentSession();
         session.beginTransaction();
-        // Employee emp = session.get(Employee.class, id);
-        // session.remove(emp);
+        Employee emp = session.get(Employee.class, id);
+        session.remove(emp);
 
-        session.createQuery("delete from Employee where salary = 1000").executeUpdate();
+        // session.createQuery("delete from Employee where salary =
+        // 1000").executeUpdate();
         session.getTransaction().commit();
         sFactory().close();
 
