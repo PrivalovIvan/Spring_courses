@@ -5,13 +5,17 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import hibernate_test.entity.Employee;
+import hibernate_test2.entity.Employee;
 import hibernate_test2.entity.Detail;
 
 public class Test1 {
     public static void main(String[] args) {
 
         Employee emp = new Employee("Veronika", "Potapova", "HR", 750);
+
+        Detail detail = new Detail("Ekaterinburg", "7123456789", "mail@mail.com");
+        emp.setEmpDetail(detail);
+        addEmployeeInDB(emp);
         // addEmployeeInDB(emp);
         // addEmployeeInDB(emp2);
         // getEmployeeFromDBById(2);

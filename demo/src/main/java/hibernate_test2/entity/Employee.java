@@ -36,6 +36,14 @@ public class Employee {
     public Employee() {
     }
 
+    public Detail getEmpDetail() {
+        return empDetail;
+    }
+
+    public void setEmpDetail(Detail empDetail) {
+        this.empDetail = empDetail;
+    }
+
     public int getId() {
         return id;
     }
@@ -81,4 +89,5 @@ public class Employee {
         return "Employee [id=" + id + ", name=" + name + ", surName=" + surName + ", department=" + department
                 + ", salary=" + salary + "]";
     }
+
 }

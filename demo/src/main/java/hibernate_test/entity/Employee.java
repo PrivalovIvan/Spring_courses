@@ -3,6 +3,7 @@ package hibernate_test.entity;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import hibernate_test2.entity.Detail;
 import jakarta.persistence.*;
 
 @Entity
@@ -82,4 +83,5 @@ public class Employee {
         return "Employee [id=" + id + ", name=" + name + ", surName=" + surName + ", department=" + department
                 + ", salary=" + salary + "]";
     }
+
 }
