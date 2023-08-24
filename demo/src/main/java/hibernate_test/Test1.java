@@ -14,16 +14,17 @@ public class Test1 {
 
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(MyConfig.class);
         Employee emp2 = context.getBean("employee", Employee.class);
-        emp2.setName("Marina");
-        emp2.setSurName("Smirnova");
-        emp2.setDepartment("Finance");
-        emp2.setSalary(1000);
+        emp2.setName("Aleksandr");
+        emp2.setSurName("Popov");
+        emp2.setDepartment("IT");
+        emp2.setSalary(1100);
         // Employee emp = new Employee("Veronika", "Potapova", "HR", 750);
         // addEmployeeInDB(emp);
         // addEmployeeInDB(emp2);
         // getEmployeeFromDBById(2);
-        // getAllEmployees();
-        getAllEmployeesByNameIvan();
+        // showAllEmployees();
+        // showAllEmployeesByNameIvan();
+        updateSalaryEmployeeInDB(1);
         context.close();
     }
 
@@ -41,15 +42,16 @@ public class Test1 {
         getEmployeeFromDBById(emp.getId());
     }
 
-    public static void getEmployeeFromDBById(int id) {
+    public static Employee getEmployeeFromDBById(int id) {
         Session session = sFactory().getCurrentSession();
         session.beginTransaction();
         Employee employee = session.get(Employee.class, id);
         session.getTransaction().commit();
         System.out.println(employee);
+        return employee;
     }
 
-    public static void getAllEmployees() {
+    public static void showAllEmployees() {
         Session session = sFactory().getCurrentSession();
         session.beginTransaction();
         List<Employee> emps = session.createQuery("from Employee").getResultList();
@@ -60,13 +62,24 @@ public class Test1 {
 
     }
 
-    public static void getAllEmployeesByNameIvan() {
+    public static void showAllEmployeesByNameIvan() {
         Session session = sFactory().getCurrentSession();
         session.beginTransaction();
         List<Employee> emps = session.createQuery("from Employee where name ='Ivan'").getResultList();
         for (Employee e : emps) {
             System.out.println(e);
         }
+        session.getTransaction().commit();
+
+    }
+
+    public static void updateSalaryEmployeeInDB(int id) {
+        Session session = sFactory().getCurrentSession();
+        session.beginTransaction();
+        // Employee emp = session.get(Employee.class, id);
+        // emp.setSalary(1300);
+
+        session.createQuery(" update Employee set salary = 1000 where department ='IT'").executeUpdate();
         session.getTransaction().commit();
 
     }
