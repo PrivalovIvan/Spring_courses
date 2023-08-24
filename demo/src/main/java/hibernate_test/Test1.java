@@ -1,5 +1,7 @@
 package hibernate_test;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -16,19 +18,57 @@ public class Test1 {
         emp2.setSurName("Smirnova");
         emp2.setDepartment("Finance");
         emp2.setSalary(1000);
-        Employee emp = new Employee("Ivan", "Privalov", "IT", 500);
-        addEmployeeInDB(emp);
-        addEmployeeInDB(emp2);
+        // Employee emp = new Employee("Veronika", "Potapova", "HR", 750);
+        // addEmployeeInDB(emp);
+        // addEmployeeInDB(emp2);
+        // getEmployeeFromDBById(2);
+        // getAllEmployees();
+        getAllEmployeesByNameIvan();
         context.close();
     }
 
-    public static void addEmployeeInDB(Employee emp) {
-        SessionFactory sf = new Configuration().configure().addAnnotatedClass(Employee.class).buildSessionFactory();
+    public static SessionFactory sFactory() {
+        return new Configuration().configure().addAnnotatedClass(Employee.class).buildSessionFactory();
 
-        Session session = sf.getCurrentSession();
+    }
+
+    public static void addEmployeeInDB(Employee emp) {
+        Session session = sFactory().getCurrentSession();
         session.beginTransaction();
         session.persist(emp);
         session.getTransaction().commit();
-        sf.close();
+        sFactory().close();
+        getEmployeeFromDBById(emp.getId());
     }
+
+    public static void getEmployeeFromDBById(int id) {
+        Session session = sFactory().getCurrentSession();
+        session.beginTransaction();
+        Employee employee = session.get(Employee.class, id);
+        session.getTransaction().commit();
+        System.out.println(employee);
+    }
+
+    public static void getAllEmployees() {
+        Session session = sFactory().getCurrentSession();
+        session.beginTransaction();
+        List<Employee> emps = session.createQuery("from Employee").getResultList();
+        for (Employee e : emps) {
+            System.out.println(e);
+        }
+        session.getTransaction().commit();
+
+    }
+
+    public static void getAllEmployeesByNameIvan() {
+        Session session = sFactory().getCurrentSession();
+        session.beginTransaction();
+        List<Employee> emps = session.createQuery("from Employee where name ='Ivan'").getResultList();
+        for (Employee e : emps) {
+            System.out.println(e);
+        }
+        session.getTransaction().commit();
+
+    }
+
 }
