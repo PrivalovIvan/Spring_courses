@@ -1,24 +1,17 @@
-package hibernate_test;
+package hibernate_test2;
 
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
 import hibernate_test.entity.Employee;
+import hibernate_test2.entity.Detail;
 
 public class Test1 {
     public static void main(String[] args) {
 
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(MyConfig.class);
-        Employee emp2 = context.getBean("employee", Employee.class);
-        emp2.setName("Aleksandr");
-        emp2.setSurName("Popov");
-        emp2.setDepartment("IT");
-        emp2.setSalary(1100);
-        // Employee emp = new Employee("Veronika", "Potapova", "HR", 750);
+        Employee emp = new Employee("Veronika", "Potapova", "HR", 750);
         // addEmployeeInDB(emp);
         // addEmployeeInDB(emp2);
         // getEmployeeFromDBById(2);
@@ -26,11 +19,11 @@ public class Test1 {
         // showAllEmployeesByNameIvan();
         // updateSalaryEmployeeInDB(1);
         removeObjectInDB(4);
-        context.close();
     }
 
     public static SessionFactory sFactory() {
-        return new Configuration().configure().addAnnotatedClass(Employee.class).buildSessionFactory();
+        return new Configuration().configure().addAnnotatedClass(Employee.class).addAnnotatedClass(Detail.class)
+                .buildSessionFactory();
 
     }
 
