@@ -1,27 +1,32 @@
-package hibernate_test2;
+package hibernate_One_to_One;
 
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import hibernate_test2.entity.Employee;
-import hibernate_test2.entity.Detail;
+
+import hibernate_One_to_One.entity.Detail;
+import hibernate_One_to_One.entity.Employee;
 
 public class Test1 {
     public static void main(String[] args) {
 
-        Employee emp = new Employee("Pavel", "Turcan", "IT", 950);
+        Employee emp = new Employee("Nikolay", "Sidorov", "Sale", 1050);
 
-        Detail detail = new Detail("Moscow", "7987654321", "mail1@mail.com");
+        Detail detail = new Detail("Ekaterinburg", "795553532", "mail3@mail.com");
         emp.setEmpDetail(detail);
+        detail.setEmployee(emp);
+
+        addDetailInDB(detail);
+        // emp.setEmpDetail(detail);
         // addEmployeeInDB(emp);
         // addEmployeeInDB(emp2);
         // getEmployeeFromDBById(1);
         // showAllEmployees();
         // showAllEmployeesByNameIvan();
         // updateSalaryEmployeeInDB(1);
-        removeObjectInDB(2);
+        // removeObjectInDB(2);
     }
 
     public static SessionFactory sFactory() {
@@ -37,6 +42,14 @@ public class Test1 {
         session.getTransaction().commit();
         sFactory().close();
         getEmployeeFromDBById(emp.getId());
+    }
+
+    public static void addDetailInDB(Detail detail) {
+        Session session = sFactory().getCurrentSession();
+        session.beginTransaction();
+        session.persist(detail);
+        session.getTransaction().commit();
+        sFactory().close();
     }
 
     public static Employee getEmployeeFromDBById(int id) {
