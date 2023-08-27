@@ -1,5 +1,6 @@
 package hibernate_One_to_One.entity;
 
+import hibernate_One_to_Many_bi.entity.Employee;
 import jakarta.persistence.*;
 
 @Entity

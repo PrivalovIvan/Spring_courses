@@ -16,7 +16,7 @@ public class Test1 {
 
         Detail detail = new Detail("Ekaterinburg", "795553532", "mail3@mail.com");
         emp.setEmpDetail(detail);
-        detail.setEmployee(emp);
+        // detail.setEmployee(emp);
 
         addDetailInDB(detail);
         // emp.setEmpDetail(detail);
