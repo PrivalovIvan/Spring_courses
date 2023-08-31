@@ -9,7 +9,7 @@ import hibernate_Many_to_Many.entity.Section;
 
 public class Test {
     public static void main(String[] args) {
-        task4();
+        task5();
     }
 
     public static void task1() {
@@ -104,6 +104,27 @@ public class Test {
 
             System.out.println(section);
             System.out.println(section.getChildren());
+
+            session.getTransaction().commit();
+
+        } finally {
+            session.close();
+            sessionFactory.close();
+        }
+    }
+
+    public static void task5() {
+        SessionFactory sessionFactory = new Configuration().configure().addAnnotatedClass(Child.class)
+                .addAnnotatedClass(Section.class).buildSessionFactory();
+
+        Session session = null;
+        try {
+            session = sessionFactory.getCurrentSession();
+            session.beginTransaction();
+
+            Section section = session.get(Section.class, 1);
+
+            session.remove(section);
 
             session.getTransaction().commit();
 
