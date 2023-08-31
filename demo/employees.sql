@@ -1,20 +1,24 @@
-CREATE TABLE my_db.departments (
+CREATE TABLE my_db.children (
   id int NOT NULL AUTO_INCREMENT,
   name varchar(15),
-  max_salary int,
-  min_salary int,
+  age int,
   PRIMARY KEY (id)
 );
 
-CREATE TABLE my_db.employees (
+CREATE TABLE my_db.section (
   id int NOT NULL AUTO_INCREMENT,
   name varchar(15),
-  surname varchar(25),
-  salary int,
-  department_id int,
-  PRIMARY KEY (id),
-  FOREIGN KEY (department_id) REFERENCES my_db.departments(id));
+  PRIMARY KEY (id)
+);
 
-  
-  SELECT * FROM employees;
-  SELECT * FROM my_db.departments;
+CREATE TABLE my_db.child_section (
+  child_id int NOT NULL,
+  section_id int NOT NULL,
+  PRIMARY KEY (child_id, section_id),
+  FOREIGN KEY (child_id) REFERENCES my_db.children(id),
+  FOREIGN KEY (section_id) REFERENCES my_db.section(id));
+
+
+  SELECT * FROM children;
+  SELECT * FROM section;
+  SELECT * FROM child_section;
