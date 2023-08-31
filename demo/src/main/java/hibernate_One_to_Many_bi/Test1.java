@@ -9,7 +9,17 @@ import hibernate_One_to_Many_bi.entity.Employee;
 
 public class Test1 {
     public static void main(String[] args) {
-        remove();
+
+        Session session = sFactory().getCurrentSession();
+
+        session.beginTransaction();
+        System.out.println("Get Department");
+        Department department = session.get(Department.class, 3);
+        System.out.println("Show Department");
+        System.out.println(department);
+        System.out.println("Show Employees");
+        System.out.println(department.getList());
+        session.getTransaction().commit();
     }
 
     public static SessionFactory sFactory() {
@@ -17,18 +27,21 @@ public class Test1 {
                 .buildSessionFactory();
     }
 
-    /* Добавляю работников в департамент cascadeType.ALl */
     public static void add() {
-        Employee employee = new Employee("Nikolay", "Sidorov", 700);
-        Employee employee2 = new Employee("Ivan", "Privalov", 500);
+        Employee employee = new Employee("Nikolay", "Sidorov", 800);
+        Employee employee2 = new Employee("Ivan", "Privalov", 1500);
+        Employee employee3 = new Employee("Oleg", "Sidorov", 1000);
 
-        Department dep = new Department("IT", 300, 1000);
+        Department dep = new Department("Sales", 800, 1500);
 
         Session session = sFactory().getCurrentSession();
         session.beginTransaction();
 
         dep.addEmployeeToDepartment(employee);
         dep.addEmployeeToDepartment(employee2);
+        dep.addEmployeeToDepartment(employee3);
+
+        session.persist(dep);
 
         session.getTransaction().commit();
         sFactory().close();
@@ -50,10 +63,6 @@ public class Test1 {
         sFactory().close();
     }
 
-    /*
-     * Удаление cascade = { CascadeType.DETACH, CascadeType.MERGE,
-     * CascadeType.PERSIST, CascadeType.REFRESH }
-     */
     public static void remove() {
         Session session = sFactory().getCurrentSession();
         session.beginTransaction();

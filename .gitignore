@@ -1,6 +1,6 @@
 demo/employees.sql
 demo/src/main/java/hibernate_test/
 demo/src/main/java/hibernate_One_to_One/
-demo/src/main/java/hibernate_One_to_Many_bi/
+!demo/src/main/java/hibernate_One_to_Many_bi/
+demo/src/main/java/hibernate_One_to_Many_uni/
 demo/target/
-.gitignore
