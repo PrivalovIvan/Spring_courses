@@ -21,7 +21,7 @@ public class Department {
 
     @Column(name = "min_salary")
     private int minSalary;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "department", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "department", fetch = FetchType.EAGER)
     private List<Employee> list;
 
     public Department(String departmentName, int maxSalary, int minSalary) {
